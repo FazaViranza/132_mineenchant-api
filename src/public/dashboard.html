@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | MineEnchant API</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body class="dashboard-page">
+
+    <div class="background-grid"></div>
+
+
+    <aside class="sidebar">
+
+        <a href="/" class="brand">
+
+            <div class="brand-icon">⛏</div>
+
+            <div>
+                <span class="brand-main">MINE</span><span class="brand-accent">ENCHANT</span>
+                <small>DEVELOPER API</small>
+            </div>
+
+        </a>
+
+
+        <div class="sidebar-menu">
+
+            <a href="#overview" class="active">
+                <span>◈</span>
+                Overview
+            </a>
+
+            <a href="#api-keys">
+                <span>🔑</span>
+                API Keys
+            </a>
+
+            <a href="#documentation">
+                <span>📖</span>
+                Documentation
+            </a>
+
+        </div>
+
+
+        <button id="logoutBtn" class="logout-btn">
+
+            ← Logout
+
+        </button>
+
+    </aside>
+
+
+
+    <main class="dashboard-main">
+
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    DASHBOARD
+                </p>
+
+                <h1>
+                    Welcome back, <span id="username">Developer</span> 👋
+                </h1>
+
+            </div>
+
+
+            <div class="user-avatar">
+
+                <span id="avatarLetter">D</span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- OVERVIEW -->
+
+        <section id="overview" class="dashboard-section">
+
+            <div class="dashboard-stats">
+
+                <div class="dashboard-stat">
+
+                    <span>✨</span>
+
+                    <div>
+                        <strong id="enchantmentCount">0</strong>
+                        <small>Enchantments</small>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-stat">
+
+                    <span>⛏</span>
+
+                    <div>
+                        <strong id="itemCount">0</strong>
+                        <small>Items</small>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-stat">
+
+                    <span>🔑</span>
+
+                    <div>
+                        <strong id="keyCount">0</strong>
+                        <small>API Keys</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- API KEY -->
+
+        <section id="api-keys" class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        ACCESS MANAGEMENT
+                    </p>
+
+                    <h2>API Keys</h2>
+
+                    <p>
+                        Generate and manage access to MineEnchant API.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="generate-key-card">
+
+                <div>
+
+                    <h3>Generate New API Key</h3>
+
+                    <p>
+                        Create a secure key to access MineEnchant API.
+                    </p>
+
+                </div>
+
+
+                <div class="generate-key-form">
+
+                    <input
+                        type="text"
+                        id="keyName"
+                        placeholder="e.g. My Minecraft Project"
+                    >
+
+                    <button id="generateKeyBtn" class="btn btn-primary">
+
+                        + Generate Key
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="keyMessage" class="form-message"></div>
+
+
+            <div class="api-key-list">
+
+                <div class="table-title">
+
+                    <h3>Your API Keys</h3>
+
+                    <span id="keyTotal">
+                        0 keys
+                    </span>
+
+                </div>
+
+
+                <div id="apiKeyContainer">
+
+                    <div class="empty-state">
+
+                        <div>🔑</div>
+
+                        <h3>No API Keys Yet</h3>
+
+                        <p>
+                            Generate your first API key to start using the API.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- DOCUMENTATION -->
+
+        <section id="documentation" class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        DEVELOPER DOCUMENTATION
+                    </p>
+
+                    <h2>Quick Start</h2>
+
+                    <p>
+                        Use your API Key to access MineEnchant data.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="docs-grid">
+
+                <div class="doc-card">
+
+                    <span class="doc-number">01</span>
+
+                    <h3>Get your API Key</h3>
+
+                    <p>
+                        Generate an API key from your dashboard.
+                    </p>
+
+                </div>
+
+
+                <div class="doc-card">
+
+                    <span class="doc-number">02</span>
+
+                    <h3>Add it to your request</h3>
+
+                    <pre>x-api-key: mc_live_your_key</pre>
+
+                </div>
+
+
+                <div class="doc-card">
+
+                    <span class="doc-number">03</span>
+
+                    <h3>Make a request</h3>
+
+                    <pre>GET /api/v1/enchantments</pre>
+
+                </div>
+
+            </div>
+
+
+            <div class="endpoint-doc">
+
+                <div class="endpoint-doc-header">
+
+                    <span class="method get">
+                        GET
+                    </span>
+
+                    <code>
+                        /api/v1/enchantments
+                    </code>
+
+                </div>
+
+
+                <p>
+                    Retrieve all available Minecraft enchantments.
+                </p>
+
+
+                <pre class="code-block">fetch("/api/v1/enchantments", {
+  headers: {
+    "x-api-key": "mc_live_your_key"
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data));</pre>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="/js/dashboard.js"></script>
+
+</body>
+
+</html>

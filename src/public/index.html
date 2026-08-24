@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MineEnchant API</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="landing-page">
+
+    <div class="background-grid"></div>
+
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <div class="brand-icon">⛏</div>
+
+            <div>
+                <span class="brand-main">MINE</span><span class="brand-accent">ENCHANT</span>
+                <small>DEVELOPER API</small>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#api">API</a>
+            <a href="#docs">Docs</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="/login.html" class="btn btn-ghost">Log in</a>
+            <a href="/register.html" class="btn btn-primary">Get API Key</a>
+        </div>
+    </nav>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    MINECRAFT DATA API
+                </div>
+
+                <h1>
+                    Build Something
+                    <span>Legendary.</span>
+                </h1>
+
+                <p>
+                    Access Minecraft enchantment data through a simple,
+                    powerful, and developer-friendly API.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="/register.html" class="btn btn-primary btn-large">
+                        Get Your API Key →
+                    </a>
+
+                    <a href="#docs" class="btn btn-secondary btn-large">
+                        View Documentation
+                    </a>
+                </div>
+
+                <div class="hero-tech">
+                    <span>⚡ REST API</span>
+                    <span>🔐 API KEY</span>
+                    <span>🗄 PostgreSQL</span>
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="enchant-card">
+
+                    <div class="card-glow"></div>
+
+                    <div class="enchant-header">
+
+                        <span class="item-icon">⛏️</span>
+
+                        <div>
+                            <small>ENCHANTMENT</small>
+                            <h3>Fortune</h3>
+                        </div>
+
+                        <span class="level">III</span>
+
+                    </div>
+
+                    <div class="enchant-line"></div>
+
+                    <p>
+                        Increases certain item drop chances from blocks.
+                    </p>
+
+                    <div class="enchant-tags">
+                        <span>Pickaxe</span>
+                        <span>Axe</span>
+                        <span>Shovel</span>
+                        <span>Hoe</span>
+                    </div>
+
+                    <div class="api-preview">
+
+                        <div class="terminal-top">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <code>
+                            GET /api/v1/enchantments/40
+                        </code>
+
+                        <pre>{
+  "name": "Fortune",
+  "max_level": 3,
+  "category": "Tools"
+}</pre>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h2>43</h2>
+                <p>Enchantments</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>16</h2>
+                <p>Items</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>5</h2>
+                <p>Categories</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>120+</h2>
+                <p>Relationships</p>
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section id="features" class="section">
+
+            <div class="section-heading">
+
+                <span class="section-tag">WHY MINEENCHANT?</span>
+
+                <h2>
+                    Everything You Need for
+                    <span>Minecraft Data.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">⚡</div>
+
+                    <h3>Fast API</h3>
+
+                    <p>
+                        Access Minecraft enchantment information instantly
+                        through REST API endpoints.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🔐</div>
+
+                    <h3>Secure Access</h3>
+
+                    <p>
+                        JWT authentication for users and API Keys
+                        for secure data access.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🔗</div>
+
+                    <h3>Rich Relationships</h3>
+
+                    <p>
+                        Explore compatible items, enchantment categories,
+                        and detailed data relationships.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">💎</div>
+
+                    <h3>Developer Friendly</h3>
+
+                    <p>
+                        Simple endpoints, clean JSON responses,
+                        and easy integration.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- API -->
+
+        <section id="api" class="section api-section">
+
+            <div class="section-heading">
+
+                <span class="section-tag">POWERFUL ENDPOINTS</span>
+
+                <h2>
+                    Simple Requests.
+                    <span>Powerful Data.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="endpoint-list">
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <code>/api/v1/enchantments</code>
+                    <span>Retrieve all enchantments</span>
+                </div>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <code>/api/v1/enchantments/:id</code>
+                    <span>Get detailed enchantment data</span>
+                </div>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <code>/api/v1/items</code>
+                    <span>Retrieve all Minecraft items</span>
+                </div>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <code>/api/v1/categories</code>
+                    <span>Retrieve enchantment categories</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+
+        <section class="cta">
+
+            <div>
+
+                <span class="section-tag">START BUILDING</span>
+
+                <h2>
+                    Your next Minecraft project
+                    <span>starts here.</span>
+                </h2>
+
+                <p>
+                    Create an account and generate your API Key in seconds.
+                </p>
+
+            </div>
+
+            <a href="/register.html" class="btn btn-primary btn-large">
+                Get Started →
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="brand footer-brand">
+            <div class="brand-icon">⛏</div>
+
+            <div>
+                <span class="brand-main">MINE</span><span class="brand-accent">ENCHANT</span>
+                <small>DEVELOPER API</small>
+            </div>
+        </div>
+
+        <p>
+            MineEnchant API • Built for developers.
+        </p>
+
+    </footer>
+
+</body>
+</html>
