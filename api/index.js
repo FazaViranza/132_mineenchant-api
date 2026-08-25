@@ -19,7 +19,9 @@ app.use(cors());
 app.use(express.json());
 
 // Serve Frontend
-app.use(express.static(path.join(__dirname, "../src/public")));
+app.use(express.static(
+    path.join(__dirname, "../src/public")
+));
 
 // API Routes
 app.use("/api/auth", authRoutes);
@@ -48,7 +50,5 @@ app.get("/api/status", async (req, res) => {
         });
     }
 });
-
-const PORT = process.env.PORT || 3000;
 
 module.exports = app;
