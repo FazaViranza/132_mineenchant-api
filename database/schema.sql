@@ -1,4 +1,21 @@
 -- ============================================
+-- MINEENCHANT SUPABASE COMPLETE SETUP
+-- Clean install: schema + seed data
+-- Run this entire file in Supabase SQL Editor
+-- ============================================
+
+BEGIN;
+
+DROP TABLE IF EXISTS enchantment_items CASCADE;
+DROP TABLE IF EXISTS enchantment_categories CASCADE;
+DROP TABLE IF EXISTS api_keys CASCADE;
+DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS enchantments CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
+
+-- ============================================
 -- MINEENCHANT API DATABASE SCHEMA
 -- ============================================
 

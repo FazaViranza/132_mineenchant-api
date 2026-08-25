@@ -1,3 +1,4 @@
+
 -- ============================================
 -- MINEENCHANT API SEED DATA
 -- ============================================
@@ -586,3 +587,20 @@ WHERE e.name = 'Silk Touch'
 AND i.name IN ('Pickaxe', 'Axe', 'Shovel', 'Hoe');
 
 SELECT COUNT(*) FROM enchantment_items;
+
+COMMIT;
+
+-- Verification
+SELECT 'users' AS table_name, COUNT(*) AS total FROM users
+UNION ALL
+SELECT 'api_keys', COUNT(*) FROM api_keys
+UNION ALL
+SELECT 'enchantments', COUNT(*) FROM enchantments
+UNION ALL
+SELECT 'categories', COUNT(*) FROM categories
+UNION ALL
+SELECT 'items', COUNT(*) FROM items
+UNION ALL
+SELECT 'enchantment_categories', COUNT(*) FROM enchantment_categories
+UNION ALL
+SELECT 'enchantment_items', COUNT(*) FROM enchantment_items;
