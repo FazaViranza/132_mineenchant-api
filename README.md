@@ -1,898 +1,541 @@
-MineEnchant API
+# MineEnchant API
 
-SaaS REST API untuk menyediakan data Minecraft Enchantment yang dapat digunakan oleh aplikasi atau developer lain melalui API Key.
+## Final Project Pengembangan Aplikasi Web
 
-Project: MineEnchant API
-Nama: Nofila Faza Viranza
-NIM: 20240140132
-Program Studi: Teknologi Informasi
-Universitas: Universitas Muhammadiyah Yogyakarta
-Tahun: 2026
+MineEnchant API adalah sebuah aplikasi **Software as a Service (SaaS)** yang menyediakan data seputar enchantment Minecraft kepada pengguna melalui REST API.
 
-1. Tentang Project
+Konsep aplikasi ini mirip dengan layanan API seperti OpenRouter atau Weather API, di mana pengguna dapat:
 
-MineEnchant API adalah aplikasi Software as a Service (SaaS) berbasis REST API yang menyediakan data Minecraft secara terstruktur.
+- Membuat akun
+- Login menggunakan JWT Authentication
+- Mendapatkan API Key
+- Mengakses data API menggunakan API Key
+- Mengambil data enchantment Minecraft
+- Mengambil data item Minecraft
+- Mengambil data kategori enchantment
 
-Konsep utama project ini adalah menyediakan data melalui API sehingga aplikasi lain tidak perlu menyimpan dan mengelola dataset Minecraft sendiri.
+API ini dibangun menggunakan **Express.js**, **PostgreSQL/Supabase**, dan dideploy menggunakan **Vercel**.
 
-Client dapat mengakses endpoint API menggunakan API Key melalui HTTP header x-api-key.
+---
 
-Selain mekanisme API Key untuk konsumsi API, sistem juga menggunakan JWT (JSON Web Token) untuk autentikasi pengguna pada fitur yang membutuhkan login.
+# Developer
 
-Tujuan
+**Nama:** Nofila Faza Viranza  
+**NIM:** 20240140132  
 
-Menyediakan data Minecraft melalui REST API.
+---
 
-Menyediakan dataset yang cukup kompleks untuk digunakan oleh aplikasi lain.
+# Live Deployment
 
-Menggunakan API Key untuk membatasi akses API.
-
-Menggunakan JWT untuk autentikasi user.
-
-Menggunakan PostgreSQL/Supabase sebagai database.
-
-Melakukan deployment backend menggunakan Vercel.
-
-2. Tech Stack
-
-Teknologi
-
-Fungsi
-
-Node.js
-
-JavaScript runtime
-
-Express.js
-
-Backend REST API
-
-PostgreSQL
-
-Relational database
-
-Supabase
-
-PostgreSQL production database
-
-JWT
-
-Authentication
-
-bcryptjs
-
-Password hashing
-
-CORS
-
-Cross-origin request handling
-
-dotenv
-
-Environment variable management
-
-Vercel
-
-Deployment
-
-Postman
-
-API testing
-
-3. Production
-
-API URL
+Vercel:
 
 https://132-mineenchant-api.vercel.app/
 
-API Status
-
-Endpoint:
-
-GET /api/status
-
-Contoh:
-
-GET https://132-mineenchant-api.vercel.app/api/status
-
-Response:
-
-{
-  "message": "MineEnchant API is running",
-  "status": "running",
-  "database": "connected",
-  "server_time": "2026-08-25T23:39:04.010Z"
-}
-
-GitHub Repository
+GitHub Repository:
 
 https://github.com/FazaViranza/132_mineenchant-api
 
-4. Fitur Utama
+---
 
-Authentication
+# Tech Stack
 
-User dapat melakukan:
+Project ini menggunakan teknologi berikut:
 
-Register
+- Node.js
+- Express.js
+- PostgreSQL
+- Supabase
+- JSON Web Token (JWT)
+- bcryptjs
+- Vercel
+- Postman
 
-Login
+---
 
-Mendapatkan JWT setelah login
+# Features
 
-JWT digunakan untuk mengakses fitur yang membutuhkan autentikasi.
+## 1. User Authentication
 
-API Key
+Sistem menyediakan fitur authentication menggunakan JWT.
 
-Client menggunakan API Key untuk mengakses public API.
+User dapat:
 
-API Key dikirim melalui header:
+- Register
+- Login
+- Mendapatkan JWT Token
+- Mengakses endpoint yang membutuhkan authentication
 
+---
+
+## 2. API Key Management
+
+Setelah user memiliki akun dan melakukan authentication, user dapat membuat API Key.
+
+API Key digunakan untuk mengakses endpoint data MineEnchant API.
+
+Contoh penggunaan:
+
+```http
 x-api-key: YOUR_API_KEY
+```
 
-Jika API Key tidak diberikan, server akan memberikan response:
+3. Enchantment API
 
-{
-  "message": "API key required"
-}
+MineEnchant menyediakan data enchantment Minecraft.
 
-Minecraft Data API
+Data yang tersedia mencakup informasi seperti:
 
-API menyediakan beberapa kelompok data:
+Nama enchantment
+Deskripsi
+Level
+Kategori
+Item yang kompatibel
 
-Enchantments
+Contoh endpoint:
 
-Categories
+GET /api/v1/enchantments
+4. Item API
 
-Items
+API menyediakan data item Minecraft yang dapat digunakan dengan enchantment tertentu.
 
-Relasi Enchantments dan Categories
+Contoh endpoint:
 
-Relasi Enchantments dan Items
+GET /api/v1/items
+5. Category API
 
-5. Database
+API menyediakan kategori enchantment.
 
-Database menggunakan PostgreSQL dan dikelola pada Supabase.
-
-Struktur utama database:
-
-users
-  │
-  └──< api_keys
-
-categories
-  │
-  └──< enchantment_categories >── enchantments
-
-items
-  │
-  └──< enchantment_items >── enchantments
-
-Tables
-
-users
-
-Menyimpan akun pengguna.
-
-Contoh informasi:
-
-ID
-
-Username
-
-Email
-
-Password yang telah di-hash
-
-api_keys
-
-Menyimpan API Key yang digunakan client untuk mengakses REST API.
-
-Contoh informasi:
-
-ID
-
-User ID
-
-Nama/key identifier
-
-API Key
-
-Status aktif
-
-enchantments
-
-Menyimpan data utama Minecraft enchantments.
-
-Production database berisi 43 enchantments.
-
-categories
-
-Menyimpan kategori enchantment.
-
-Production database berisi 5 categories.
-
-items
-
-Menyimpan item Minecraft yang berhubungan dengan enchantment.
-
-Production database berisi 16 items.
-
-enchantment_categories
-
-Tabel penghubung many-to-many antara enchantments dan categories.
-
-Production database berisi 45 records.
-
-enchantment_items
-
-Tabel penghubung many-to-many antara enchantments dan items.
-
-Production database berisi 121 records.
-
-Dataset
-
-Data production yang telah diverifikasi:
-
-Table
-
-Records
-
-enchantments
-
-43
-
-categories
-
-5
-
-items
-
-16
-
-enchantment_categories
-
-45
-
-enchantment_items
-
-121
-
-users
-
-0*
-
-api_keys
-
-0*
-
-Total domain + relationship records: 230
-
-users dan api_keys bergantung pada aktivitas user dan bukan bagian dari dataset Minecraft seed.
-
-6. Authentication Flow
-
-JWT Flow
-
-User
- │
- ▼
-Login
- │
- ▼
-Validate Credentials
- │
- ├── Invalid → Error Response
- │
- ▼
-Generate JWT
- │
- ▼
-Client stores JWT
- │
- ▼
-Authenticated Request
-
-JWT digunakan untuk membuktikan bahwa request berasal dari user yang telah berhasil melakukan login.
-
-Password user tidak disimpan sebagai plaintext. Password diproses menggunakan bcryptjs.
-
-7. API Key Flow
-
-Client
- │
- │ x-api-key
- ▼
-Express.js
- │
- ▼
-API Key Middleware
- │
- ├── Missing → 401
- │
- ├── Invalid → 401
- │
- ▼
-Controller
- │
- ▼
-PostgreSQL / Supabase
- │
- ▼
-JSON Response
-
-API Key dipisahkan dari JWT agar credential untuk mengonsumsi API tidak sama dengan credential autentikasi user.
-
-8. API Documentation
-
-8.1 Authentication
-
-Register
-
-POST /api/auth/register
-
-Contoh request:
-
-{
-  "username": "example",
-  "email": "example@email.com",
-  "password": "password123"
-}
-
-Login
-
-POST /api/auth/login
-
-Contoh request:
-
-{
-  "email": "example@email.com",
-  "password": "password123"
-}
-
-Response berhasil akan menyediakan JWT yang digunakan untuk request terproteksi.
-
-8.2 API Key
-
-Get API Keys
-
-GET /api/api-keys
-
-Endpoint ini digunakan untuk melihat API Key milik user yang telah terautentikasi.
-
-Create API Key
-
-POST /api/api-keys
-
-Endpoint ini digunakan untuk membuat API Key baru.
-
-Request membutuhkan JWT.
-
-Delete API Key
-
-DELETE /api/api-keys/:id
-
-Endpoint ini digunakan untuk menghapus API Key.
-
-Request membutuhkan JWT.
-
-9. Public REST API
-
-Endpoint public API berada di bawah:
-
-/api/v1
-
-Public endpoint menggunakan API Key.
-
-9.1 Categories
-
-Get Categories
+Contoh endpoint:
 
 GET /api/v1/categories
 
-Header:
+Contoh kategori yang tersedia:
 
-x-api-key: YOUR_API_KEY
+All Purpose
+Armor
+Melee Weapons
+Ranged Weapons
+Tools
+Database
 
-Contoh production:
+MineEnchant API menggunakan PostgreSQL yang dihosting menggunakan Supabase.
 
-GET https://132-mineenchant-api.vercel.app/api/v1/categories
+Database terdiri dari beberapa tabel utama:
+| Table                  | Description                        |
+| ---------------------- | ---------------------------------- |
+| users                  | Menyimpan data pengguna            |
+| api_keys               | Menyimpan API Key pengguna         |
+| enchantments           | Menyimpan data enchantment         |
+| categories             | Menyimpan kategori enchantment     |
+| items                  | Menyimpan data item Minecraft      |
+| enchantment_categories | Relasi enchantment dengan kategori |
+| enchantment_items      | Relasi enchantment dengan item     |
 
-Response yang telah diuji:
+Database memiliki relasi antar tabel untuk mendukung data enchantment yang lebih kompleks.
 
-{
-  "message": "Categories retrieved successfully",
-  "total": 5,
-  "data": [
-    {
-      "id": 1,
-      "name": "All Purpose"
-    },
-    {
-      "id": 2,
-      "name": "Armor"
-    }
-  ]
-}
+Total data yang tersedia telah memenuhi requirement minimal project.
 
-Response production mengembalikan 5 categories.
-
-9.2 Items
-
-Get Items
-
-GET /api/v1/items
-
-Header:
-
-x-api-key: YOUR_API_KEY
-
-Endpoint mengembalikan data item Minecraft yang tersedia pada database.
-
-Production database berisi 16 items.
-
-9.3 Enchantments
-
-Get Enchantments
-
-GET /api/v1/enchantments
-
-Header:
-
-x-api-key: YOUR_API_KEY
-
-Production database berisi 43 enchantments.
-
-10. API Key Example
-
-Setelah memperoleh API Key, client dapat melakukan request seperti:
-
-GET https://132-mineenchant-api.vercel.app/api/v1/categories
-x-api-key: YOUR_API_KEY
-
-Jangan menuliskan API Key asli ke source code, README, atau repository public.
-
-11. Error Handling
-
-API menggunakan HTTP status code untuk menunjukkan hasil request.
-
-Contoh ketika API Key tidak diberikan:
-
-{
-  "message": "API key required"
-}
-
-Status:
-
-401 Unauthorized
-
-Contoh ketika API berhasil:
-
-200 OK
-
-Response dikembalikan dalam format JSON.
-
-12. Project Structure
-
-Struktur project:
-
-132_mineenchant-api/
+Project Structure
+```
+132_mineenchant-api
 │
-├── api/
+├── api
 │   └── index.js
 │
-├── database/
+├── database
 │   ├── schema.sql
 │   └── seed.sql
 │
-├── src/
-│   ├── config/
+├── src
+│   │
+│   ├── config
 │   │   └── db.js
 │   │
-│   ├── controllers/
+│   ├── controllers
 │   │   ├── apiKeyController.js
 │   │   ├── authController.js
 │   │   ├── categoryController.js
 │   │   ├── enchantmentController.js
 │   │   └── itemController.js
 │   │
-│   ├── middleware/
+│   ├── middleware
 │   │   ├── apiKeyMiddleware.js
 │   │   └── authMiddleware.js
 │   │
-│   ├── public/
-│   │   ├── css/
+│   ├── public
+│   │   ├── css
 │   │   │   └── style.css
-│   │   ├── js/
+│   │   │
+│   │   ├── js
 │   │   │   ├── auth.js
 │   │   │   └── dashboard.js
+│   │   │
 │   │   ├── dashboard.html
 │   │   ├── index.html
 │   │   ├── login.html
 │   │   └── register.html
 │   │
-│   ├── routes/
-│   │   ├── apiKeyRoutes.js
-│   │   ├── authRoutes.js
-│   │   ├── categoryRoutes.js
-│   │   ├── enchantmentRoutes.js
-│   │   └── itemRoutes.js
-│   │
-│   └── utils/
+│   └── routes
+│       ├── apiKeyRoutes.js
+│       ├── authRoutes.js
+│       ├── categoryRoutes.js
+│       ├── enchantmentRoutes.js
+│       └── itemRoutes.js
 │
 ├── .env
 ├── .gitignore
-├── index.js
 ├── package.json
 ├── package-lock.json
 └── vercel.json
+```
 
-13. Local Installation
+Installation
 
-Requirements
-
-Pastikan sudah terinstall:
-
-Node.js
-
-npm
-
-PostgreSQL atau akses Supabase
-
-Git
-
-Clone Repository
-
+Clone repository:
+```
 git clone https://github.com/FazaViranza/132_mineenchant-api.git
 
-Masuk ke folder:
+Masuk ke folder project:
 
 cd 132_mineenchant-api
 
-Install dependencies:
+Install dependency:
 
 npm install
+Environment Variables
 
-14. Environment Variables
+Buat file .env pada root project.
 
-Buat file:
+Contoh konfigurasi:
 
-.env
-
-Gunakan format:
-
-POSTGRES_URL=YOUR_DATABASE_URL
+POSTGRES_URL=your_postgresql_connection_string
 
 PORT=3000
 
-JWT_SECRET=YOUR_JWT_SECRET
+JWT_SECRET=mineenchant_super_secret_key
 
 JWT_EXPIRES=1d
+```
 
-Untuk production, environment variables dikonfigurasi melalui Vercel.
-
-Jangan commit .env ke GitHub.
-
-15. Database Setup
-
-Database schema tersedia pada:
-
-database/schema.sql
-
-Seed data tersedia pada:
-
-database/seed.sql
-
-Jika menggunakan Supabase:
-
-Buka project Supabase.
-
-Masuk ke SQL Editor.
-
-Jalankan schema.
-
-Jalankan seed.
-
-Pastikan tabel berhasil dibuat.
-
-Pastikan data berhasil masuk.
-
-Hubungkan POSTGRES_URL ke aplikasi.
-
-Setelah database siap, endpoint berikut dapat digunakan untuk mengecek koneksi:
-
-GET /api/status
-
-Response yang diharapkan:
-
-{
-  "message": "MineEnchant API is running",
-  "status": "running",
-  "database": "connected"
-}
-
-16. Running Locally
-
-Jalankan:
-
+Contoh POSTGRES_URL:
+```
+POSTGRES_URL=postgresql://username:password@host:port/database?sslmode=require
+Running the Application
+```
+Jalankan project menggunakan:
+```
 npm start
-
-Server berjalan pada:
-
-http://localhost:3000
-
-Untuk development menggunakan nodemon:
-
+```
+Atau menggunakan nodemon:
+```
 npm run dev
+```
+Server akan berjalan pada:
+```
+http://localhost:3000
+API Status
+```
+Untuk memastikan API dan database berjalan dengan baik:
+```
+GET /api/status
+```
+Contoh response:
+```
+{
+    "message": "MineEnchant API is running",
+    "status": "running",
+    "database": "connected",
+    "server_time": "2026-08-25T23:39:04.010Z"
+}
+```
+Authentication
+Register
 
-17. Testing with Postman
+Endpoint:
+```
+POST /api/auth/register
+```
+Contoh request body:
+```
+{
+    "username": "exampleuser",
+    "email": "example@email.com",
+    "password": "password123"
+}
+```
+Login
 
-Contoh request:
+Endpoint:
+```
+POST /api/auth/login
+```
+Contoh request body:
+```
+{
+    "email": "example@email.com",
+    "password": "password123"
+}
+```
+Setelah login berhasil, server akan memberikan JWT Token yang digunakan untuk authentication.
 
-GET http://localhost:3000/api/v1/categories
+JWT Authentication
 
-Tambahkan header:
+Endpoint tertentu membutuhkan JWT Token.
+
+Token dapat dikirim melalui Authorization Header:
+
+Authorization: Bearer YOUR_JWT_TOKEN
+API Key
+
+MineEnchant menggunakan API Key untuk melindungi endpoint data.
+
+API Key dikirim melalui request header:
 
 x-api-key: YOUR_API_KEY
 
-Expected result:
-
-200 OK
-
-Tanpa API Key:
-
-GET http://localhost:3000/api/v1/categories
-
-Expected result:
-
-401 Unauthorized
-
-Dengan response:
-
+Jika API Key tidak dikirim, API akan memberikan response:
+```
 {
-  "message": "API key required"
+    "message": "API key required"
 }
+```
+API Endpoints
+Authentication
+| Method | Endpoint             | Description        |
+| ------ | -------------------- | ------------------ |
+| POST   | `/api/auth/register` | Register user baru |
+| POST   | `/api/auth/login`    | Login user         |
 
-18. Deployment
+API Key
+| Method        | Endpoint        | Description        |
+| ------------- | --------------- | ------------------ |
+| API Key Route | `/api/api-keys` | API Key management |
 
-Project dideploy menggunakan Vercel.
+Enchantments
 
-Database production menggunakan Supabase PostgreSQL.
+Endpoint:
+```
+GET /api/v1/enchantments
+```
+Header:
+```
+x-api-key: YOUR_API_KEY
+```
+Items
 
-Deployment flow:
+Endpoint:
+```
+GET /api/v1/items
+```
+Header:
+```
+x-api-key: YOUR_API_KEY
+```
+Categories
 
-GitHub Repository
-       │
-       ▼
-     Vercel
-       │
-       ▼
-  Express.js API
-       │
-       ▼
-Supabase PostgreSQL
+Endpoint:
+```
+GET /api/v1/categories
+```
+Header:
+```
+x-api-key: YOUR_API_KEY
+```
+Contoh response:
+```
+{
+    "message": "Categories retrieved successfully",
+    "total": 5,
+    "data": [
+        {
+            "id": 1,
+            "name": "All Purpose"
+        },
+        {
+            "id": 2,
+            "name": "Armor"
+        },
+        {
+            "id": 3,
+            "name": "Melee Weapons"
+        },
+        {
+            "id": 4,
+            "name": "Ranged Weapons"
+        },
+        {
+            "id": 5,
+            "name": "Tools"
+        }
+    ]
+}
+```
+Example Request
 
-Environment variables production disimpan pada Vercel dan tidak ditulis langsung di source code.
+Contoh request menggunakan cURL:
+```
+curl -X GET "http://localhost:3000/api/v1/categories" \
+-H "x-api-key: YOUR_API_KEY"
+```
 
-Production URL:
+Untuk deployment Vercel:
+```
+curl -X GET "https://132-mineenchant-api.vercel.app/api/v1/categories" \
+-H "x-api-key: YOUR_API_KEY"
+```
+Deployment
 
+Aplikasi dideploy menggunakan Vercel.
+
+Live API:
+```
 https://132-mineenchant-api.vercel.app/
-
-Status endpoint:
-
+```
+Contoh API Status:
+```
 https://132-mineenchant-api.vercel.app/api/status
+```
+SaaS Concept
 
-19. Security
+MineEnchant API menerapkan konsep Software as a Service (SaaS).
 
-Project menerapkan beberapa mekanisme keamanan:
+Sistem menyediakan data kepada pengguna melalui API.
+
+Alur penggunaan aplikasi:
+```
+User
+  │
+  ▼
+Register Account
+  │
+  ▼
+Login
+  │
+  ▼
+Receive JWT Token
+  │
+  ▼
+Create / Obtain API Key
+  │
+  ▼
+Send API Request
+  │
+  ▼
+API Key Validation
+  │
+  ▼
+Access Minecraft Enchantment Data
+```
+
+Dengan konsep ini, pengguna dapat menggunakan MineEnchant API sebagai sumber data untuk aplikasi atau project mereka sendiri.
+
+API Security
+
+MineEnchant API menggunakan beberapa mekanisme keamanan:
 
 Password Hashing
 
-Password tidak disimpan dalam plaintext dan diproses menggunakan bcryptjs.
+Password user tidak disimpan dalam bentuk plain text.
 
-JWT
+Password diamankan menggunakan:
 
-JWT digunakan untuk autentikasi user.
+bcryptjs
+JWT Authentication
 
-API Key
+JWT digunakan untuk memastikan endpoint authentication hanya dapat digunakan oleh user yang telah login.
 
-Public API membutuhkan API Key melalui:
+API Key Authentication
 
-x-api-key
+Endpoint data MineEnchant dilindungi menggunakan API Key.
 
-Environment Variables
-
-Credential database dan secret tidak ditulis langsung di source code production.
-
-20. Testing Checklist
-
-Test
-
-Expected Result
-
-GET /api/status
-
-200 OK
-
-Database connection
-
-Connected
-
-Register
-
-User created
-
-Login
-
-JWT generated
-
-Request tanpa API Key
-
-401
-
-Request dengan API Key valid
-
-200
-
-GET categories
-
-5 records
-
-GET items
-
-16 records
-
-GET enchantments
-
-43 records
-
-Production deployment
-
-Accessible via Vercel
-
-21. Screenshots / Evidence
-
-Untuk dokumentasi project dan laporan, screenshot yang direkomendasikan:
-
-Screenshot 1 — Vercel Deployment
-
-Tampilkan halaman deployment Vercel yang menunjukkan:
-
-Project name
-
-Deployment status Ready
-
-Production URL
-
-Screenshot 2 — Supabase Database
-
-Tampilkan Supabase Table Editor atau SQL Editor yang menunjukkan tabel:
-
-users
-api_keys
-enchantments
-categories
-items
-enchantment_categories
-enchantment_items
-
-Screenshot 3 — Dataset
-
-Tampilkan hasil query/count yang membuktikan:
-
-enchantments = 43
-categories = 5
-items = 16
-enchantment_categories = 45
-enchantment_items = 121
-
-Screenshot 4 — API Status
-
-Postman/browser:
-
-GET https://132-mineenchant-api.vercel.app/api/status
-
-Dengan response:
-
-{
-  "message": "MineEnchant API is running",
-  "status": "running",
-  "database": "connected"
-}
-
-Screenshot 5 — API Key Authentication
-
-Postman dengan:
+Setiap request ke endpoint API harus menyertakan:
 
 x-api-key: YOUR_API_KEY
+Testing
 
-dan response 200 OK.
+API telah diuji menggunakan Postman.
 
-Screenshot 6 — Unauthorized Request
+Beberapa endpoint yang telah diuji:
+```
+GET /api/status
 
-Postman tanpa API Key dan response:
+POST /api/auth/register
 
-{
-  "message": "API key required"
-}
+POST /api/auth/login
 
-Screenshot 7 — Categories / Items / Enchantments
+API Key Management
 
-Minimal satu screenshot Postman yang menunjukkan response data dari endpoint public API.
+GET /api/v1/enchantments
 
-22. Project Requirements Checklist
+GET /api/v1/items
 
-Requirement
+GET /api/v1/categories
+```
 
-Status
+Contoh hasil testing:
+```
 
-SaaS
+Status: 200 OK
+```
+Database juga berhasil terhubung dengan Supabase PostgreSQL.
 
-✅
+Deployment Architecture
+```
+                    ┌───────────────┐
+                    │     User      │
+                    └───────┬───────┘
+                            │
+                            ▼
+                    ┌───────────────┐
+                    │    Vercel     │
+                    │  Express API  │
+                    └───────┬───────┘
+                            │
+                            ▼
+                    ┌───────────────┐
+                    │   Supabase    │
+                    │  PostgreSQL   │
+                    └───────────────┘
+```
 
-REST API
+Requirements Fulfillment
 
-✅
-
-Express.js
-
-✅
-
-PostgreSQL / Supabase
-
-✅
-
-JWT Login
-
-✅
-
-API Key
-
-✅
-
-Minimal 2 tabel
-
-✅
-
-Dataset > 50 records
-
-✅
-
-Complex relational data
-
-✅
-
-ERD
-
-✅
-
-Use Case Diagram
-
-✅
-
-Activity Diagram / User Flow
-
-✅
-
-Vercel Deployment
-
-✅
-
+Project ini telah memenuhi requirement final project:
+```
+ Menggunakan konsep SaaS
+ Menyediakan data melalui REST API
+ Menggunakan API Key
+ Menggunakan JWT Authentication
+ Menggunakan Express.js
+ Menggunakan PostgreSQL
+ Menggunakan Supabase
+ Minimal 2 tabel
+ Menyediakan lebih dari 50 data
+ Memiliki relasi database
+ Dideploy menggunakan Vercel
+ Memiliki GitHub Repository
+ Memiliki dokumentasi laporan
+```
+Links
+```
 GitHub Repository
 
-✅
+https://github.com/FazaViranza/132_mineenchant-api
 
-Postman Testing
+Live API
 
-✅
+https://132-mineenchant-api.vercel.app/
 
-23. Author
+API Status
+
+https://132-mineenchant-api.vercel.app/api/status
+```
+Author
 
 Nofila Faza Viranza
-20240140132
 
-Program Studi Teknologi Informasi
-Fakultas Teknik
+NIM: 20240140132
+
+Final Project - Pengembangan Aplikasi Web
+
 Universitas Muhammadiyah Yogyakarta
-
-2026
